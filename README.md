@@ -14,4 +14,6 @@ https://github.com/PatrickAlphaC/html-fund-me-fcc
   * `provider.getSigner()` returns a Promise and it needs `await`
   * `ethers.utils.parseEther` was replaced with `ethers.parseEther`
     * similarly `ethers.utils.formatEther` was replaced with `ethers.formatEther`
+  * `transactionReceipt.confirmations` replaced with function `transactionReceipt.confirmations()` which
+  returns a Promise 
   * **ethers** migration guide from 5 to 6: https://docs.ethers.org/v6/migrating/
