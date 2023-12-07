@@ -49,12 +49,9 @@ async function fund() {
     console.log(`Funding with ${ethAmount}...`)
     if (typeof window.ethereum !== "undefined") {
         const provider = new ethers.BrowserProvider(window.ethereum)
-        console.log(`provider: ${provider}`)
         const signer = await provider.getSigner()
-        console.log(`signer: ${signer}`)
         // const contract = new ethers.Contract(contractAddress, abi, signer)
         const contract = new ethers.Contract(contractAddress, abi, signer)
-        console.log(`contract: ${contract}`)
         try {
             const transactionResponse = await contract.fund({
                 value: ethers.parseEther(ethAmount),
@@ -87,9 +84,9 @@ function listenForTransactionMine(transactionResponse, provider) {
     return new Promise((resolve, reject) => {
         try {
             provider.once(transactionResponse.hash, (transactionReceipt) => {
-                console.log(
-                    `Completed with ${transactionReceipt.confirmations} confirmations. `
-                )
+                transactionReceipt.confirmations().then((confirmations) => {
+                    console.log(`Completed with ${confirmations} confirmations.`)
+                })
                 resolve()
             })
         } catch (error) {
